@@ -17,6 +17,9 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;700&family=Poppins:wght@200;400;500;700&display=swap" rel="stylesheet">
     <ViewTransitions />
   </head>
   <body
@@ -50,7 +53,7 @@ const { title } = Astro.props;
           20px 20px; /* Tamaño de las celdas de la cuadrícula */
         background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
         margin: 0; /* Elimina el margen predeterminado del body */
-        font-family: system-ui, sans-serif;
+        font-family: 'Inter', sans-serif;
         color: #fff;
       }
       code {
