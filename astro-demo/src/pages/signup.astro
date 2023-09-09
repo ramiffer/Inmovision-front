@@ -3,34 +3,66 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 
-  <section class="h-screen ">
+  <section class="h-screen">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
-      <a
-        href="/"
-        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white "
-      >
-        <img class="w-10 h-15 mr-2" src="https://iili.io/J9vk1bS.png " alt="logo" />
-         Inmo<span class="text-[#a21caf]">vision</span>
-      </a>
+
       <div
         class="w-full rounded-lg dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 log-div"
       >
         <div
-          class="p-6 shadow-[#a21caf6e] shadow-lg space-y-4 md:space-y-6 sm:p-8 text-white"
+          class="p-6 shadow-[#a21caf6e] shadow-lg space-y-4 md:space-y-6 sm:py-4 sm:px-8 text-white"
         >
           <h1
             class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
           >
-            Log in to your account
+          <a
+          href="/"
+          class="flex items-center justify-center mb-2 text-2xl font-semibold text-gray-900 dark:text-white "
+        >
+          <img class="w-10 h-15 mr-2" src="https://iili.io/J9vk1bS.png " alt="logo" />
+           Inmo<span class="text-[#a21caf]">vision</span>
+        </a>
           </h1>
           <form class="space-y-4 md:space-y-6" action="#">
+            <section class="flex justify-between gap-2">
+            <div>
+                <label
+                  for="first_name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >First Name
+                </label>
+                <input
+                  type="text"
+                  name="first_name"
+                  id="first_name"
+                  class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="First Name"
+                  required=""
+                />
+              </div>
+              <div>
+                <label
+                  for="last_name"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Last Name
+                </label>
+                <input
+                  type="text"
+                  name="last_name"
+                  id="last_name"
+                  class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Last Name"
+                  required=""
+                />
+              </div>
+            </section>
             <div>
               <label
                 for="username"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Your <span class="text-m text-[#a21caf]">username</span>
+                >Username
               </label>
               <input
                 type="text"
@@ -41,6 +73,21 @@ import Layout from "../layouts/Layout.astro";
                 required=""
               />
             </div>
+            <div>
+                <label
+                  for="email"
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Email"
+                  required=""
+                />
+              </div>
             <div>
               <label
                 for="password"
@@ -55,29 +102,6 @@ import Layout from "../layouts/Layout.astro";
                 class="bg-gray-50 border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
               />
-            </div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                  <input
-                    id="remember"
-                    aria-describedby="remember"
-                    type="checkbox"
-                    class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                    required=""
-                  />
-                </div>
-                <div class="ml-3 text-sm">
-                  <label for="remember" class="text-gray-500 dark:text-gray-300"
-                    >Remember me</label
-                  >
-                </div>
-              </div>
-              <a
-                href="/forgot-password"
-                class="text-sm font-medium text-white hover:underline dark:text-primary-500"
-                >Forgot your password?</a
-              >
             </div>
             <a
               href="#_"
@@ -100,15 +124,15 @@ import Layout from "../layouts/Layout.astro";
               </span>
               <span
                 class="absolute flex items-center justify-center w-full h-full text-white transition-all duration-300 transform group-hover:translate-x-full ease"
-                >Log in</span
+                >Register</span
               >
-              <span class="relative invisible">Log in</span>
+              <span class="relative invisible">Register</span>
             </a>
             <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-              Dont have an account yet? <a
-                href="/signup"
+              You have an account? <a
+                href="/login"
                 class="font-medium text-[#a21caf] hover:underline dark:text-primary-500"
-                >Create account</a
+                >Log in</a
               >
             </p>
           </form>
