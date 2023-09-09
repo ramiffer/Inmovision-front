@@ -5,7 +5,7 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://github.com/ramiffer/Inmovision-front.git',
+  site: 'https://ramiffer.github.io',
   base: '/'
 });
 
