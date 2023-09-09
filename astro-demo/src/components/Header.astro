@@ -6,6 +6,7 @@ import HeaderButton from "./HeaderButton.astro";
 const menuitems = [
   {
     title: "Services",
+    patch: "services"
   },
   {
     title: "What we do",
@@ -25,7 +26,7 @@ const menuitems = [
   <Astronav>
     <div class="flex w-full lg:w-auto items-center justify-between pl-10">
       <a href="/">
-        <img src="../../public/logo.png" class="w-16" alt="Logo" />
+        <img src="https://iili.io/J9vk1bS.png" class="w-16" alt="logo" />
       </a>
       <div class="block lg:hidden pr-10">
         <MenuIcon class="text-lg text-white" />
@@ -38,7 +39,7 @@ const menuitems = [
             <>
               {item && (
                 <li>
-                  <HeaderLink href="/">{item.title}</HeaderLink>
+                  <HeaderLink href={`#${item.patch}`}>{item.title}</HeaderLink>
                 </li>
               )}
             </>
@@ -46,15 +47,15 @@ const menuitems = [
         }
       </ul>
       <div class="lg:hidden flex items-center justify-center mt-3 gap-6">
-        <HeaderButton href="#">Log in</HeaderButton>
-        <HeaderButton href="#">Sign up</HeaderButton>
+        <HeaderButton height="h-12" width="w-24" href="/login">Log in</HeaderButton>
+        <HeaderButton height="h-12" width="w-24" href="/register">Sign up</HeaderButton>
       </div>
     </MenuItems>
   </Astronav>
   <div>
     <div class="hidden lg:flex items-center gap-4 pr-10">
-      <HeaderButton href="#">Log in</HeaderButton>
-      <HeaderButton href="#">Sign up</HeaderButton>
+      <HeaderButton height="h-12" width="w-24" href="/login">Log in</HeaderButton>
+      <HeaderButton height="h-12" width="w-24" href="/register">Sign up</HeaderButton>
     </div>
   </div>
 </header>
