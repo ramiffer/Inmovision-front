@@ -1,7 +1,6 @@
 ---
 import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 import HeaderLink from "./HeaderLink.astro";
-import HeaderButton from "./HeaderButton.astro";
 
 const menuitems = [
   {
@@ -39,7 +38,7 @@ const menuitems = [
             <>
               {item && (
                 <li>
-                  <HeaderLink href={`#${item.patch}`}>{item.title}</HeaderLink>
+                  <HeaderLink isBorder={false} href={`#${item.patch}`}>{item.title}</HeaderLink>
                 </li>
               )}
             </>
@@ -47,15 +46,15 @@ const menuitems = [
         }
       </ul>
       <div class="lg:hidden flex items-center justify-center mt-3 gap-6">
-        <HeaderButton height="h-12" width="w-24" href="/login">Log in</HeaderButton>
-        <HeaderButton height="h-12" width="w-24" href="/signup">Sign up</HeaderButton>
+        <HeaderLink isBorder={true} href="/login">Log in</HeaderLink>
+        <HeaderLink isBorder={true} href="/signup">Sign up</HeaderLink>
       </div>
     </MenuItems>
   </Astronav>
   <div>
     <div class="hidden lg:flex items-center gap-4 pr-10">
-      <HeaderButton height="h-12" width="w-24" href="/login">Log in</HeaderButton>
-      <HeaderButton height="h-12" width="w-24" href="/signup">Sign up</HeaderButton>
+      <HeaderLink isBorder={true} href="/login">Log in</HeaderLink>
+      <HeaderLink isBorder={true} href="/signup">Sign up</HeaderLink>
     </div>
   </div>
 </header>
