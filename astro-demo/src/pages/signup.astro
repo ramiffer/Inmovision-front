@@ -1,5 +1,47 @@
 ---
-import Layout from "../layouts/Layout.astro";
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = String(data.get("username"));
+    const firstName = String(data.get("firstName"));
+    const lastName = String(data.get("lastName"));
+    const email = String(data.get("email"));
+    const password = String(data.get("password"));
+
+    console.log(name, email, password + " " + firstName + " " + lastName);
+
+    const formData = new FormData();
+    formData.append("username", name);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("email", email);
+    formData.append("password", password);
+
+    const response = await fetch("http://localhost:8080/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: name,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      }),
+    });
+
+    if (response.ok) {
+      console.log("Usuario registrado");
+    } else {
+      console.log("Error al registrar usuario");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
 <section class="h-screen">
@@ -27,18 +69,18 @@ import Layout from "../layouts/Layout.astro";
              Inmo<span class="text-[#a21caf]">vision</span>
           </a>
         </h1>
-        <form class="space-y-4 md:space-y-6" action="/auth/register">
+        <form class="space-y-4 md:space-y-6" method="post">
           <section class="flex justify-between gap-2">
             <div>
               <label
-                for="username"
+                for="firstName"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >First Name
               </label>
               <input
                 type="text"
-                name="username"
-                id="username"
+                name="firstName"
+                id="firstName"
                 class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="First Name"
                 required=""
@@ -46,20 +88,35 @@ import Layout from "../layouts/Layout.astro";
             </div>
             <div>
               <label
-                for="password"
+                for="lastName"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >Password
+                >Last Name
               </label>
               <input
-                type="password"
-                name="password"
-                id="password"
+                type="text"
+                name="lastName"
+                id="lastName"
                 class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="Password"
+                placeholder="Last Name"
                 required=""
               />
             </div>
           </section>
+          <div>
+            <label
+              for="username"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Username"
+              required=""
+            />
+          </div>
           <div>
             <label
               for="email"
@@ -71,42 +128,27 @@ import Layout from "../layouts/Layout.astro";
               name="email"
               id="email"
               class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="email"
+              placeholder="Email"
               required=""
             />
           </div>
           <div>
             <label
-              for="firstname"
+              for="password"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Email
-            </label>
-            <input
-              type="text"
-              name="firstname"
-              id="firstname"
-              class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="First name"
-              required=""
-            />
-          </div>
-          <div>
-            <label
-              for="lastname"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Last name</label
+              >Password</label
             >
             <input
-              type="text"
-              name="lastname"
-              id="lastname"
-              placeholder="lastname"
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
               class="bg-gray-50 border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required=""
             />
           </div>
-          <a
-            href="#_"
+          <button
+            type="submit"
             class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-[#a21caf] rounded-full shadow-md group"
           >
             <span
@@ -129,7 +171,7 @@ import Layout from "../layouts/Layout.astro";
               >Register</span
             >
             <span class="relative invisible">Register</span>
-          </a>
+          </button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
             You have an account? <a
               href="/login"
