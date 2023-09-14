@@ -8,4 +8,7 @@ export default defineConfig({
   integrations: [tailwind(), preact()],
   site: 'https://ramiffer.github.io',
   output: 'hybrid'
+    adapter: node({
+    mode: 'standalone',
+  }),
 });
