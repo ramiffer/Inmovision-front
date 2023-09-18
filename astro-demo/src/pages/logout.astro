@@ -1,0 +1,6 @@
+---
+if (!!Astro.cookies.get("jwt")) {
+  Astro.cookies.delete("jwt");
+  return Astro.redirect("/");
+}
+---

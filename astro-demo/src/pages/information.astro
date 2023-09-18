@@ -1,36 +1,126 @@
 ---
 import UserDashboard from "../components/UserDashboard.astro";
+
+const jwt = Astro.cookies.get("jwt");
+console.log(jwt?.value);
+//==================================================================================================
+// GET USER DATA
+let userData;
+let directionsData;
+if (Astro.request.method === "GET") {
+  try {
+    const response = await fetch("http://localhost:8080/auth/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt?.value}`,
+      },
+    });
+
+    if (response.ok) {
+      userData = await response.json();
+    } else {
+      console.log("Error al obtener los datos del usuario");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+  try {
+    const response = await fetch(
+      `http://localhost:8080/profile/${userData.id}/address`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt?.value}`,
+        },
+      }
+    );
+    console.log(response);
+    if (response.ok) {
+      directionsData = await response.json();
+    } else {
+      console.log("Error al obtener los datos del usuario");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+}
+
+console.log(userData);
+console.log(userData.supplier);
+console.log(directionsData);
+
+
+interface Direction {
+	street1: string;
+	street2: string;
+	city: string;
+	country: string;
+}
 ---
 
 <UserDashboard>
-	<section>
-		<h2 class="text-center font-bold text-xl my-5">General Information</h2>
-		<div class="flex flex-col gap-5">
-			<p class="text-lg">Name: <span class="font-bold">Facundo</span></p>
-			<p class="text-lg">Last Name: <span class="font-bold">Duarte</span></p>
-			<p class="text-lg">Username: <span class="font-bold">facundo.duarte</span></p>
-			<p class="text-lg">
-				Directions: <span class="font-bold">Pedro Celestino Buaza 4254</span>
-			</p>
-			<p class="text-lg">
-				Email: <span class="font-bold">facundoduarte1313@gmail.com</span>
-			</p>
-			<p class="text-lg">Password: <span class="font-bold">********</span></p>
-		</div>
-	</section>
+  <section>
+    <h2 class="text-center font-bold text-xl my-5">General Information</h2>
+    <div class="flex flex-col gap-5">
+      <p class="text-lg">
+        Name: <span class="font-bold">{userData.firstName}</span>
+      </p>
+      <p class="text-lg">
+        Last Name: <span class="font-bold">{userData.lastName}</span>
+      </p>
+      <p class="text-lg">
+        Username: <span class="font-bold">{userData.username}</span>
+      </p>
+      <p class="text-lg">
+        Email: <span class="font-bold">{userData.email}</span>
+      </p>
+      <p class="text-lg">
+        Directions: {directionsData.map ((direction: Direction) => (
+		  <span class="font-bold">{direction.street1},</span>
+		  <span class="font-bold">{direction.street2}</span>
+		  <span class="font-bold">{direction.city},</span>
+		  <span class="font-bold">{direction.country}</span>
+		  <br/>
+		))}
+      </p>
+      {
+        userData.supplier != true ? (
+          <p />
+        ) : (
+          <>
+            <p class="text-lg">
+              Company name:
+              <span class="font-bold">{userData.supplier.companyName}</span>
+            </p>
+            <p class="text-lg">
+              Company phone:
+              <span class="font-bold">{userData.supplier.companyPhone}</span>
+            </p>
+          </>
+        )
+      }
+    </div>
+  </section>
 </UserDashboard>
 
 <style>
-	body {
-		background-color: #0d0f14; /* Color de fondo blanco */
-		background-image:
-			linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-			/* Líneas verticales */ linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
-		background-size:
-			20px 20px,
-			20px 20px; /* Tamaño de las celdas de la cuadrícula */
-		background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
-		margin: 0; /* Elimina el margen predeterminado del body */
-		color: #fff;
-	}
+  body {
+    background-color: #0d0f14; /* Color de fondo blanco */
+    background-image:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+      /* Líneas verticales */
+        linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+    background-size:
+      20px 20px,
+      20px 20px; /* Tamaño de las celdas de la cuadrícula */
+    background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+    margin: 0; /* Elimina el margen predeterminado del body */
+    color: #fff;
+  }
 </style>
