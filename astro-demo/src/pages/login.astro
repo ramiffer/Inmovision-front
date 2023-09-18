@@ -1,17 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
+<Layout title="Inmovision - Ingreso">
 
-
-  <section class="h-screen ">
+  <section class="h-screen">
     <div
       class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
     >
       <a
         href="/"
-        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white "
+        class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
       >
-        <img class="w-10 h-15 mr-2" src="https://iili.io/J9vk1bS.png " alt="logo" />
+        <img
+          class="w-10 h-15 mr-2"
+          src="https://iili.io/J9vk1bS.png "
+          alt="logo"
+        />
          Inmo<span class="text-[#a21caf]">vision</span>
       </a>
       <div
@@ -116,27 +120,10 @@ import Layout from "../layouts/Layout.astro";
       </div>
     </div>
   </section>
-
+</Layout>
 
 <style is:inline>
-    .log-div {
-        background-color: #1d1e29;
-    }
-    body{
-      
-
-        background-color: #1d1e29; /* Color de fondo blanco */
-        background-image:
-          linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-          /* Líneas verticales */
-            linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
-        background-size:
-          20px 20px,
-          20px 20px; /* Tamaño de las celdas de la cuadrícula */
-        background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
-        margin: 0; /* Elimina el margen predeterminado del body */
-        font-family: system-ui, sans-serif;
-        color: #fff;
-   
-    }
+  .log-div {
+    background-color: #1d1e29;
+  }
 </style>

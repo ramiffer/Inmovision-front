@@ -1,13 +1,25 @@
 ---
-import { Carousel } from './Carousel';
+import Carousel from './Carousel.astro';
+export const prerender = true;
 ---
 
-<div class="h-screen flex flex-col text-center w-full mx-auto gap-12">
-  <div>
-    <h1 class="tracking-widest text-2xl sm:text-3xl md:text-5xl lg:text-6xl">Here are some ready designs</h1>
+
+
+<section id="services" class="h-screen flex flex-col justify-center gap-16">
+  <div class="text-center">
+    <h1 class="tracking-widest text-2xl sm:text-3xl md:text-5xl lg:text-6xl">
+      Here are some ready designs
+    </h1>
   </div>
-  <Carousel client:visible />
-  <div>
-    <button class="text-white w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-bold text-xl tracking-widest rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900">CATALOG</button>
+  
+  <Carousel />
+
+  <div class="text-center">
+    <button
+      class="text-white w-64 h-12 bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-bold text-xl tracking-widest rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
+    >
+      CATALOG
+    </button>
   </div>
-</div>
+</section>
+
