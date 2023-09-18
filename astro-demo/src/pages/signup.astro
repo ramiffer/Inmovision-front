@@ -1,4 +1,6 @@
 ---
+import Layout from "../layouts/Layout.astro";
+
 if (Astro.request.method === "POST") {
 	try {
 		const data = await Astro.request.formData();
@@ -42,9 +44,9 @@ if (Astro.request.method === "POST") {
 		}
 	}
 }
+
 ---
 
-<<<<<<< HEAD
 <Layout title="Inmovision - Registro">
   <section class="h-screen">
     <div
