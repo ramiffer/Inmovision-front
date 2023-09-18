@@ -1,0 +1,36 @@
+---
+import UserDashboard from "../components/UserDashboard.astro";
+---
+
+<UserDashboard>
+	<section>
+		<h2 class="text-center font-bold text-xl my-5">General Information</h2>
+		<div class="flex flex-col gap-5">
+			<p class="text-lg">Name: <span class="font-bold">Facundo</span></p>
+			<p class="text-lg">Last Name: <span class="font-bold">Duarte</span></p>
+			<p class="text-lg">Username: <span class="font-bold">facundo.duarte</span></p>
+			<p class="text-lg">
+				Directions: <span class="font-bold">Pedro Celestino Buaza 4254</span>
+			</p>
+			<p class="text-lg">
+				Email: <span class="font-bold">facundoduarte1313@gmail.com</span>
+			</p>
+			<p class="text-lg">Password: <span class="font-bold">********</span></p>
+		</div>
+	</section>
+</UserDashboard>
+
+<style>
+	body {
+		background-color: #0d0f14; /* Color de fondo blanco */
+		background-image:
+			linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+			/* Líneas verticales */ linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+		background-size:
+			20px 20px,
+			20px 20px; /* Tamaño de las celdas de la cuadrícula */
+		background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+		margin: 0; /* Elimina el margen predeterminado del body */
+		color: #fff;
+	}
+</style>
