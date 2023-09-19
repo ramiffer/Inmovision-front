@@ -3,8 +3,9 @@ import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 import HeaderLink from "../header/HeaderLink.astro";
 import UserIcon from "../header/UserIcon.astro";
 import CartButton from "../header/CartButton.astro";
+import { api } from "../../services/apiroute";
 
-const menuitems = [
+const userItems = [
   {
     title: "Services",
     patch: "services",
@@ -19,6 +20,57 @@ const menuitems = [
     title: "Contact",
   },
 ];
+const supplierItems = [
+  {
+    title: "Services",
+    href: "#services",
+  },
+  {
+    title: "What we do",
+    href: "#whatwedo",
+  },
+  {
+    title: "Who we are",
+    href: "#whoweare",
+  },
+  {
+    title: "Contact",
+    href: "#contact",
+  },
+  {
+    title: "Add product",
+    href: "/new/products",
+  },
+];
+
+const jwt = Astro.cookies.get("jwt");
+console.log(jwt?.value);
+
+let userData;
+if (Astro.request.method === "GET") {
+  try {
+    const response = await fetch(`${api}auth/me`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt?.value}`,
+      },
+    });
+
+    if (response.ok) {
+      userData = await response.json();
+    } else {
+      console.log("Error al obtener los datos del usuario");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+}
+
+let supplierData = userData?.supplier;
+console.log(supplierData);
 ---
 
 <header
@@ -38,17 +90,33 @@ const menuitems = [
         class="flex flex-col items-center lg:flex-row lg:gap-3 ease-out duration-900"
       >
         {
-          menuitems.map((item) => (
-            <>
-              {item && (
-                <li>
-                  <HeaderLink isBorder={false} href={`#${item.patch}`}>
-                    {item.title}
-                  </HeaderLink>
-                </li>
-              )}
-            </>
-          ))
+          () => {
+            if (supplierData == null) {
+              return userItems.map((item) => (
+                <>
+                  {item && (
+                    <li>
+                      <HeaderLink isBorder={false} href={`#${item.patch}`}>
+                        {item.title}
+                      </HeaderLink>
+                    </li>
+                  )}
+                </>
+              ));
+            } else {
+              return supplierItems.map((item) => (
+                <>
+                  {item && (
+                    <li>
+                      <HeaderLink isBorder={false} href={`${item.href}`}>
+                        {item.title}
+                      </HeaderLink>
+                    </li>
+                  )}
+                </>
+              ));
+            }
+          }
         }
       </ul>
       <div class="lg:hidden flex items-center justify-center mt-3 gap-6">
