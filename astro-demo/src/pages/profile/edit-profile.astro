@@ -1,0 +1,110 @@
+---
+import UserDashboard from "../../components/user/UserDashboard.astro";
+---
+
+<UserDashboard>
+  <div>
+    <form
+      class="h-full flex flex-col justify-between space-y-4 md:space-y-6"
+      action="#"
+    >
+      <h2 class="text-center font-bold text-xl">Edit profile</h2>
+      <div>
+        <label
+          for="first_name"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >First Name
+        </label>
+        <input
+          type="text"
+          name="first_name"
+          id="first_name"
+          class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="First Name"
+          required=""
+        />
+      </div>
+      <div>
+        <label
+          for="last_name"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Last Name
+        </label>
+        <input
+          type="text"
+          name="last_name"
+          id="last_name"
+          class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Last Name"
+          required=""
+        />
+      </div>
+
+      <div>
+        <label
+          for="username"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Username
+        </label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Username"
+          required=""
+        />
+      </div>
+      <div>
+        <label
+          for="email"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Email"
+          required=""
+        />
+      </div>
+      <div>
+        <label
+          for="password"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Password</label
+        >
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          class="bg-gray-50 border outline-0 border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          required=""
+        />
+      </div>
+      <input
+        type="submit"
+        class="cursor-pointer bg-[#C2820B] p-2 px-5 rounded-sm self-end"
+      />
+    </form>
+  </div>
+</UserDashboard>
+
+<style>
+  body {
+    background-color: #0d0f14; /* Color de fondo blanco */
+    background-image:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+      /* Líneas verticales */
+        linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+    background-size:
+      20px 20px,
+      20px 20px; /* Tamaño de las celdas de la cuadrícula */
+    background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+    margin: 0; /* Elimina el margen predeterminado del body */
+    color: #fff;
+  }
+</style>

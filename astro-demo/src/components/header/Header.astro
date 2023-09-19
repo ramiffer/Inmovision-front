@@ -1,0 +1,230 @@
+---
+import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
+import HeaderLink from "../header/HeaderLink.astro";
+import UserIcon from "../header/UserIcon.astro";
+import CartButton from "../header/CartButton.astro";
+
+const menuitems = [
+  {
+    title: "Services",
+    patch: "services",
+  },
+  {
+    title: "What we do",
+  },
+  {
+    title: "Who we are",
+  },
+  {
+    title: "Contact",
+  },
+];
+let supplier = false;
+let client = false;
+---
+
+<header
+  class="flex flex-col lg:flex-row justify-between items-center mb-5 py-2 border-b border-[#343841]"
+>
+  <Astronav>
+    <div class="flex w-full lg:w-auto items-center justify-between pl-10">
+      <a href="/">
+        <img src="https://iili.io/J9vk1bS.png" class="w-10" alt="logo" />
+      </a>
+      <div class="block lg:hidden pr-10">
+        <MenuIcon class="text-lg text-white" />
+      </div>
+    </div>
+    <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
+      <ul
+        class="flex flex-col items-center lg:flex-row lg:gap-3 ease-out duration-900"
+      >
+        {
+          menuitems.map((item) => (
+            <>
+              {item && (
+                <li>
+                  <HeaderLink isBorder={false} href={`#${item.patch}`}>
+                    {item.title}
+                  </HeaderLink>
+                </li>
+              )}
+            </>
+          ))
+        }
+      </ul>
+      <div class="lg:hidden flex items-center justify-center mt-3 gap-6">
+        {
+          () => {
+            if (!!Astro.cookies.get("jwt") == false) {
+              return (
+                <>
+                  <HeaderLink isBorder={true} href="/auth/login">
+                    Log in
+                  </HeaderLink>
+                  <HeaderLink isBorder={true} href="/auth/signup">
+                    Sign up
+                  </HeaderLink>
+                </>
+              );
+            } else if (!supplier && client) {
+              return (
+                <>
+                  <UserIcon href="/profile/information">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-user"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                      <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                  </UserIcon>
+                  <CartButton>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-shopping-cart"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                      <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                      <path d="M17 17h-11v-14h-2" />
+                      <path d="M6 5l14 1l-1 7h-13" />
+                    </svg>
+                  </CartButton>
+                </>
+              );
+            } else {
+              return (
+                <UserIcon href="/profile/information">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-user"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                  </svg>
+                </UserIcon>
+              );
+            }
+          }
+        }
+      </div>
+    </MenuItems>
+  </Astronav>
+  <div>
+    <div class="hidden lg:flex items-center gap-4 pr-10">
+      {
+        () => {
+          if (!!Astro.cookies.get("jwt") == false) {
+            return (
+              <>
+                <HeaderLink isBorder={true} href="/auth/login">
+                  Log in
+                </HeaderLink>
+                <HeaderLink isBorder={true} href="/auth/signup">
+                  Sign up
+                </HeaderLink>
+              </>
+            );
+          } else if (!supplier && client) {
+            return (
+              <>
+                <UserIcon href="/profile/information">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-user"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                  </svg>
+                </UserIcon>
+                <CartButton>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-shopping-cart"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                    <path d="M17 17h-11v-14h-2" />
+                    <path d="M6 5l14 1l-1 7h-13" />
+                  </svg>
+                </CartButton>
+              </>
+            );
+          } else {
+            return (
+              <UserIcon href="/profile/information">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-user"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                </svg>
+              </UserIcon>
+            );
+          }
+        }
+      }
+    </div>
+  </div>
+</header>
+
+<style is:inline>
+  header {
+    background-color: #0d0f14;
+  }
+</style>

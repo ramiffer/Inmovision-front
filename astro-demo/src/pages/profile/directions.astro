@@ -1,6 +1,6 @@
 ---
-import UserDashboard from "../components/UserDashboard.astro";
-import { getWhoisData } from "../services/whois.ts";
+import UserDashboard from "../../components/user/UserDashboard.astro.tsx";
+import { getWhoisData } from "../../services/whois.ts";
 const jwt = Astro.cookies.get("jwt");
 let userId;
 let jwtValue = jwt?.value;
