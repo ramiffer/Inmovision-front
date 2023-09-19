@@ -1,20 +1,69 @@
 ---
 import UserDashboard from "../../components/user/UserDashboard.astro";
+import { api } from "../../services/apiroute";
+import { getWhoisData } from "../../services/whois";
+
+const jwt = Astro.cookies.get("jwt");
+console.log(jwt);
+if (jwt?.value == undefined) {
+  return Astro.redirect("/auth/login");
+}
+
+let jwtValue = jwt?.value;
+
+if (jwt !== undefined) {
+  const userData = await getWhoisData(jwtValue);
+  console.log(userData);
+}
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const companyName = String(data.get("companyName"));
+    const companyPhone = String(data.get("companyPhone"));
+
+    const formData = new FormData();
+    formData.append("companyName", companyName);
+    formData.append("companyPhone", companyPhone);
+
+    if (jwt !== undefined) {
+      const response = await fetch(`${api}auth/suppliers`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtValue}`,
+        },
+        body: JSON.stringify({
+          companyName: companyName,
+          companyPhone: companyPhone,
+        }),
+      });
+      console.log(response);
+      if (response.ok) {
+        console.log("Usuario es proovedor");
+      } else {
+        console.log("Error al hacerse proovedor");
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 ---
 
 <UserDashboard>
   <div>
-    <form class="h-full flex flex-col md:space-y-6" action="#">
+    <form class="h-full flex flex-col md:space-y-6" method="post">
       <h2 class="text-center font-bold text-xl">Be a supplier</h2>
 
       <label
-        for="company_name"
+        for="companyName"
         class="block text-sm my-3 font-medium text-gray-900 dark:text-white"
         >Company name
 
         <input
           type="text"
-          name="company_name"
+          name="companyName"
           id="company_name"
           class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Company Name"
@@ -22,13 +71,13 @@ import UserDashboard from "../../components/user/UserDashboard.astro";
         />
       </label>
       <label
-        for="company_phone"
+        for="companyPhone"
         class="block text-sm font-medium text-gray-900 dark:text-white"
         >Company phone
 
         <input
           type="text"
-          name="company_phone"
+          name="companyPhone"
           id="company_phone"
           class="bg-gray-50 outline-0 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 my-0"
           placeholder="Company Phone"

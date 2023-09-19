@@ -1,7 +1,12 @@
 ---
-import UserDashboard from "../../components/user/UserDashboard.astro.tsx";
+import UserDashboard from "../../components/user/UserDashboard.astro";
 import { getWhoisData } from "../../services/whois.ts";
+import { api } from "../../services/apiroute";
+
 const jwt = Astro.cookies.get("jwt");
+if (jwt?.value == undefined) {
+  return Astro.redirect("/auth/login");
+}
 let userId;
 let jwtValue = jwt?.value;
 
@@ -26,22 +31,19 @@ if (Astro.request.method === "POST") {
     formData.append("city", city);
     formData.append("country", country);
     if (jwt !== undefined) {
-      const response = await fetch(
-        `http://localhost:8080/profile/${userId}/address`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${jwtValue}`,
-          },
-          body: JSON.stringify({
-            street1: street_1,
-            street2: street_2,
-            city: city,
-            country: country,
-          }),
-        }
-      );
+      const response = await fetch(`${api}profile/${userId}/address`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtValue}`,
+        },
+        body: JSON.stringify({
+          street1: street_1,
+          street2: street_2,
+          city: city,
+          country: country,
+        }),
+      });
       if (response.ok) {
         console.log("Direcciones agregadas correctamente");
       } else {

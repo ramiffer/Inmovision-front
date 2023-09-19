@@ -1,6 +1,10 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import UserDashboard from "../../components/user/UserDashboard.astro";
+const jwt = Astro.cookies.get("jwt");
+if (jwt?.value == undefined) {
+  return Astro.redirect("/auth/login");
+}
 ---
 
 <UserDashboard />

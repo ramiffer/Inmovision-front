@@ -1,15 +1,18 @@
 ---
 import UserDashboard from "../../components/user/UserDashboard.astro";
+import { api } from "../,,/../../services/apiroute"
 
 const jwt = Astro.cookies.get("jwt");
 console.log(jwt?.value);
-//==================================================================================================
-// GET USER DATA
+if (jwt?.value == undefined) {
+  return Astro.redirect("/auth/login");
+}
 let userData;
 let directionsData;
+
 if (Astro.request.method === "GET") {
   try {
-    const response = await fetch("http://localhost:8080/auth/me", {
+    const response = await fetch(`${api}auth/me`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +32,7 @@ if (Astro.request.method === "GET") {
   }
   try {
     const response = await fetch(
-      `http://localhost:8080/profile/${userData.id}/address`,
+      `${api}profile/${userData.id}/address`,
       {
         method: "GET",
         headers: {
@@ -51,6 +54,14 @@ if (Astro.request.method === "GET") {
   }
 }
 
+const isSupplier = !!userData.supplier;
+const supplierData = userData.supplier;
+
+
+
+console.log(isSupplier);
+console.log(supplierData);
+
 console.log(userData);
 console.log(userData.supplier);
 console.log(directionsData);
@@ -62,6 +73,8 @@ interface Direction {
 	city: string;
 	country: string;
 }
+
+
 ---
 
 <UserDashboard>
@@ -89,22 +102,25 @@ interface Direction {
 		  <br/>
 		))}
       </p>
+    { () =>
       {
-        userData.supplier != true ? (
-          <p />
-        ) : (
-          <>
+        if (isSupplier == true) {
+          console.log(isSupplier);
+          return(
+            <>
             <p class="text-lg">
               Company name:
-              <span class="font-bold">{userData.supplier.companyName}</span>
+              <span class="font-bold">{supplierData.companyName}</span>
             </p>
             <p class="text-lg">
               Company phone:
-              <span class="font-bold">{userData.supplier.companyPhone}</span>
+              <span class="font-bold">{supplierData.companyPhone}</span>
             </p>
           </>
-        )
-      }
+          )
+        }
+      }       
+    }
     </div>
   </section>
 </UserDashboard>
