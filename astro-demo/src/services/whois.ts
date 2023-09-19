@@ -1,6 +1,6 @@
 export async function getWhoisData(jwt: string) {
   try {
-    const response = await fetch("http://localhost:8080/auth/me", {
+    const response = await fetch("http://18.188.94.170/auth/me", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
