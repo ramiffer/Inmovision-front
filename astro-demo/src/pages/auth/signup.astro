@@ -34,7 +34,7 @@ if (Astro.request.method === "POST") {
 
     if (response.ok) {
       console.log("Usuario registrado");
-      return Astro.redirect("/verifyEmail");
+      return Astro.redirect("/auth/login");
     } else {
       console.log("Error al registrar usuario");
     }

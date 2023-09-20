@@ -4,6 +4,7 @@ import { api } from "../,,/../../services/apiroute"
 
 const jwt = Astro.cookies.get("jwt");
 console.log(jwt?.value);
+
 if (jwt?.value == undefined) {
   return Astro.redirect("/auth/login");
 }
@@ -54,8 +55,12 @@ if (Astro.request.method === "GET") {
   }
 }
 
-const isSupplier = !!userData.supplier;
-const supplierData = userData.supplier;
+
+
+
+const isSupplier = !!userData?.supplier !== undefined;
+const supplierData = userData?.supplier;
+
 
 
 
@@ -63,7 +68,6 @@ console.log(isSupplier);
 console.log(supplierData);
 
 console.log(userData);
-console.log(userData.supplier);
 console.log(directionsData);
 
 
@@ -82,19 +86,19 @@ interface Direction {
     <h2 class="text-center font-bold text-xl my-5">General Information</h2>
     <div class="flex flex-col gap-5">
       <p class="text-lg">
-        Name: <span class="font-bold">{userData.firstName}</span>
+        Name: <span class="font-bold">{userData?.firstName}</span>
       </p>
       <p class="text-lg">
-        Last Name: <span class="font-bold">{userData.lastName}</span>
+        Last Name: <span class="font-bold">{userData?.lastName}</span>
       </p>
       <p class="text-lg">
-        Username: <span class="font-bold">{userData.username}</span>
+        Username: <span class="font-bold">{userData?.username}</span>
       </p>
       <p class="text-lg">
-        Email: <span class="font-bold">{userData.email}</span>
+        Email: <span class="font-bold">{userData?.email}</span>
       </p>
       <p class="text-lg">
-        Directions: {directionsData.map ((direction: Direction) => (
+        Directions: {directionsData?.map ((direction: Direction) => (
 		  <span class="font-bold">{direction.street1},</span>
 		  <span class="font-bold">{direction.street2}</span>
 		  <span class="font-bold">{direction.city},</span>
@@ -104,7 +108,7 @@ interface Direction {
       </p>
     { () =>
       {
-        if (isSupplier == true) {
+        if (isSupplier == true && supplierData != undefined) {
           console.log(isSupplier);
           return(
             <>

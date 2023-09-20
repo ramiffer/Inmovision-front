@@ -1,0 +1,36 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  sDescription: string;
+  price: number;
+  imageData: string;
+}
+const { id, name, sDescription, price, imageData } = Astro.props;
+---
+
+<a
+  href="#"
+  class="rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+>
+  <picture class="flex justify-center p-4">
+    <img
+      class="border-2 border-gray-700 rounded-lg w-34 h-34"
+      src={imageData}
+      alt={`image for ${id}`}
+      class="mb-2 rounded-lg w-34 h-34"
+    />
+  </picture>
+
+  <header class="p-4 flex-grow">
+    <h3 class="text-center font-bold text-lg text-gray-400 mb-2">
+      {name}
+    </h3>
+    <p class="mb-2 text-gray-400">
+      {sDescription}
+    </p>
+    <p class="mb-2 text-gray-400">
+      Price: <span class="text-green-200">${price}</span>
+    </p>
+  </header>
+</a>
