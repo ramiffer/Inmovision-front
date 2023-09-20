@@ -7,23 +7,8 @@ import { api } from "../../services/apiroute";
 
 const userItems = [
   {
-    title: "Services",
-    patch: "services",
-  },
-  {
-    title: "What we do",
-  },
-  {
-    title: "Who we are",
-  },
-  {
-    title: "Contact",
-  },
-];
-const supplierItems = [
-  {
-    title: "Services",
-    href: "#services",
+    title: "Pricing",
+    href: "/pricing/plans",
   },
   {
     title: "What we do",
@@ -34,8 +19,26 @@ const supplierItems = [
     href: "#whoweare",
   },
   {
-    title: "Contact",
-    href: "#contact",
+    title: "Catalog",
+    href: "#catalog",
+  },
+];
+const supplierItems = [
+  {
+    title: "Pricing",
+    href: "/pricing/plans",
+  },
+  {
+    title: "What we do",
+    href: "#whatwedo",
+  },
+  {
+    title: "Who we are",
+    href: "#whoweare",
+  },
+  {
+    title: "Catalog",
+    href: "#catalog",
   },
   {
     title: "Add product",
@@ -96,7 +99,7 @@ console.log(supplierData);
                 <>
                   {item && (
                     <li>
-                      <HeaderLink isBorder={false} href={`#${item.patch}`}>
+                      <HeaderLink isBorder={false} href={`${item.href}`}>
                         {item.title}
                       </HeaderLink>
                     </li>
