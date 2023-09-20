@@ -1,11 +1,20 @@
-<section class="about__us mb-36 max-w-5xl px-4 m-auto related" id="about__us">
+---
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<section class="about__us mb-36 max-w-5xl px-4 m-auto related" id={id}>
 	<div class="about">
 		<div class="inner-container rounded-lg border shadow-md bg-gray-800 border-gray-700">
 			<h1>About us</h1>
 			<p class="text">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum esse veniam
-				molestias rem totam modi sit sed minima repellendus libero expedita incidunt nisi
-				sequi ducimus atque deserunt delectus, necessitatibus iste?
+				We are an e-commerce platform dedicated to transforming the furniture shopping
+				experience into something unique. In our online store, we offer you the ability to
+				explore and view our products in 3D, giving you an exceptionally immersive
+				shopping experience.
 			</p>
 			<div class="skills">
 				<span>Innovation</span>

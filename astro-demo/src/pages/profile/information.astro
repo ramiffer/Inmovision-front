@@ -32,7 +32,7 @@ if (Astro.request.method === "GET") {
   }
   try {
     const response = await fetch(
-      `${api}profile/${userData.id}/address`,
+      `${api}profile/${userData?.id}/address`,
       {
         method: "GET",
         headers: {
@@ -74,6 +74,7 @@ interface Direction {
 	country: string;
 }
 
+console.log(directionsData);
 
 ---
 
