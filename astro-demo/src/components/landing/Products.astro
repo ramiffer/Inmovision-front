@@ -1,0 +1,272 @@
+---
+import { getAllProductsForAllUsers } from "../../services/getAllProducts";
+import HeaderButton from "../header/HeaderButton.astro";
+
+const jwt = Astro.cookies.get("jwt");
+let products: any = [];
+
+if (jwt != undefined) {
+  products = await getAllProductsForAllUsers(jwt.value, products);
+  console.log(products);
+}
+---
+
+<section class="h-screen flex flex-col items-center">
+  <div class="flex flex-col p-12 items-center">
+    <h2 class="text-center m-6 text-4xl">
+      Our <span class="text-fuchsia-700">Products</span>
+    </h2>
+    <HeaderButton height="h-16" width="w-40" href="/inventary/list-of-products">
+      Catalog
+    </HeaderButton>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdT5G9.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTRC7.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTITl.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTxp4.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTuQS.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTTj2.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdT74e.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SEPARACION -->
+  <!-- SEPARACION -->
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="swiper-container-2">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTa3u.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTcYb.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTlvj.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdT0yx.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTETQ.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTGjV.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div
+                class="card rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:border-gray-500 transition flex flex-col"
+              >
+                <img
+                  src="https://iili.io/JJdTMZB.md.png"
+                  alt=""
+                  class="card-img-top"
+                />
+                <div class="card-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="text-lg">
+    We have the best <span class="text-fuchsia-700">customizable models</span>
+     for any taste!
+  </p>
+</section>
+
+<style is:inline>
+  .swiper-container,
+  .swiper-container-2 {
+    overflow-x: hidden;
+    margin-bottom: 15px;
+  }
+  .swiper-slide {
+    min-height: 30vh;
+    width: 200px;
+    max-width: 70vw;
+    height: 10px;
+    display: flex;
+    justify-content: center;
+    border-radius: 15px;
+    align-items: center;
+  }
+  .card {
+    width: 95%;
+    height: 95%;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .swiper-wrapper {
+    transition-timing-function: linear;
+  }
+</style>
+<script>
+  import Swiper from "swiper/bundle";
+  import "swiper/swiper-bundle.css";
+  var swiper = new Swiper(".swiper-container", {
+    effect: "slide",
+    autoplay: true,
+    loop: true,
+    slidesPerView: 3,
+    spaceBetween: 15,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+  var swiper2 = new Swiper(".swiper-container-2", {
+    effect: "slide",
+    autoplay: {
+      reverseDirection: true,
+    },
+    loop: true,
+    slidesPerView: 3,
+    spaceBetween: 15,
+    pagination: {
+      el: ".swiper-pagination",
+    },
+  });
+</script>
