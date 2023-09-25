@@ -1,5 +1,28 @@
+---
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
 <button
-  class=`flex-row justify-center text-white cursor-pointer font-medium text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 mr-2 mb-2 transition-all duration-200 ease-in-out hover:scale-110 scale-90`
+	id={id}
+	class=`flex-row relative justify-center text-white cursor-pointer font-medium text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 m-4 transition-all duration-200 ease-in-out hover:scale-110 scale-90`
 >
-  <slot />
+	<slot />
 </button>
+
+<script>
+	const cart = document.getElementById("mobileCart");
+	const menu = document.getElementById("menuCart");
+	const h = document.getElementById("closeMenu");
+
+	cart?.addEventListener("click", () => {
+		menu?.classList.add("show__menu");
+		console.log("menu");
+	});
+	h?.addEventListener("click", () => {
+		menu?.classList.remove("show__menu");
+	});
+</script>

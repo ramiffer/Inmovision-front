@@ -1,0 +1,136 @@
+---
+import { api } from "../../services/apiroute";
+import HeaderLink from "../header/HeaderLink.astro";
+
+const userItems = [
+	{
+		title: "Pricing",
+		href: "/pricing/plans",
+	},
+	{
+		title: "What we do",
+		href: "#whatwedo",
+	},
+	{
+		title: "Who we are",
+		href: "#whoweare",
+	},
+	{
+		title: "Catalog",
+		href: "#catalog",
+	},
+];
+const supplierItems = [
+	{
+		title: "Pricing",
+		href: "/pricing/plans",
+	},
+	{
+		title: "What we do",
+		href: "#whatwedo",
+	},
+	{
+		title: "Who we are",
+		href: "#whoweare",
+	},
+	{
+		title: "Catalog",
+		href: "#catalog",
+	},
+	{
+		title: "Add product",
+		href: "/new/products",
+	},
+];
+
+const jwt = Astro.cookies.get("jwt");
+console.log(jwt?.value);
+
+let userData;
+if (Astro.request.method === "GET") {
+	try {
+		const response = await fetch(`${api}auth/me`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${jwt?.value}`,
+			},
+		});
+
+		if (response.ok) {
+			userData = await response.json();
+		} else {
+			console.log("Error al obtener los datos del usuario");
+		}
+	} catch (error) {
+		if (error instanceof Error) {
+			console.log(error.message);
+		}
+	}
+}
+
+let supplierData = userData?.supplier;
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<footer class="mt-36 flex bg-[#0D0F14] border-y border-[#343841] flex-col" id={id}>
+	<section class="flex gap-5 flex-col justify-around md:flex-row px-12 py-6 lg:px-16">
+		<div class="">
+			<ul class="flex items-center flex-col gap-4">
+				<h4 class="text-3xl font-bold">Web</h4>
+				{
+					() => {
+						if (supplierData == null) {
+							return userItems.map((item) => (
+								<>
+									{item && (
+										<li>
+											<a class="text-[#ddd] hover:opacity-50" href={`${item.href}`}>
+												{item.title}
+											</a>
+										</li>
+									)}
+								</>
+							));
+						} else {
+							return supplierItems.map((item) => (
+								<>
+									{item && (
+										<li>
+											<a class="text-[#ddd] hover:opacity-50" href={`${item.href}`}>
+												{item.title}
+											</a>
+										</li>
+									)}
+								</>
+							));
+						}
+					}
+				}
+			</ul>
+		</div>
+		<div class="">
+			<ul class="flex items-center flex-col gap-4">
+				<a href="/"><img class="w-10" src="https://iili.io/J9vk1bS.png" alt="" /></a>
+				<h4 class="text-3xl font-bold">About us</h4>
+				<li class="">Direccion: 4875 Juan Silva</li>
+				<li class="">Teléfono: 5544 12 23 14</li>
+				<li class="">Email: inmovisi0n@outlook.es</li>
+			</ul>
+		</div>
+		<div class="">
+			<ul class="flex items-center flex-col gap-4">
+				<h4 class="text-3xl font-bold">Account</h4>
+				<li><a class="text-[#ddd] hover:opacity-50" href="/auth/login">Log in</a></li>
+				<li>
+					<a class="text-[#ddd] hover:opacity-50" href="/auth/signup">Sign up</a>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<p class="text-center p-4">Todos los derechos reservados - InmoVision Company 2023</p>
+</footer>

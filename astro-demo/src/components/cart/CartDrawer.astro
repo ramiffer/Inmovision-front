@@ -1,0 +1,93 @@
+<div id="menuCart" class="cart-menu">
+	<div class="h-screen w-full">
+		<div class="flex flex-col min-h-full max-h-screen">
+			<div
+				class="flex items-start justify-between shadow-sm border-b border-[#343841] p-4"
+			>
+				<h2 class="text-2xl flex gap-4 items-center font-bold text-white">Your Cart</h2>
+				<div class="ml-3 flex h-7 items-center">
+					<button class="-m-2 p-2 text-gray-400 hover:text-gray-500" id="closeMenu">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="icon icon-tabler icon-tabler-x"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							stroke-width="2"
+							stroke="currentColor"
+							fill="none"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<path d="M18 6l-12 12"></path>
+							<path d="M6 6l12 12"></path>
+						</svg>
+					</button>
+				</div>
+			</div>
+			<div
+				class="products-information flex-1 overflow-y-scroll scrollbar scrollbar-thumb-[#1b1c26] scrollbar-track-[#0D0F14] pl-3.5 pr-2 pb-5"
+			>
+				<ul class="divide-y divide-[#343841] row-product"></ul>
+			</div>
+			<div class="border-t border-[#343841] p-5">
+				<div class="flex justify-between text-base font-medium text-gray-900">
+					<p class="text-white">Subtotal</p>
+					<p class="text-white total-value"></p>
+				</div>
+				<p class="mt-0.5 text-sm text-gray-500">
+					Shipping and taxes calculated at checkout.
+				</p>
+				<div class="mt-6 text-center">
+					<a
+						href=""
+						class="button hover:brightness-150 transition-all duration-200 ease-in-out"
+						>Checkout</a
+					>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+	const cart = document.getElementById("cart");
+	const menu = document.getElementById("menuCart");
+	const h = document.getElementById("closeMenu");
+
+	cart?.addEventListener("click", () => {
+		menu?.classList.add("show__menu");
+	});
+</script>
+
+<style>
+	.button {
+		padding: 1rem 3rem;
+		background-color: #1f2937;
+		width: 100%;
+		display: block;
+		border-radius: 0.5rem;
+	}
+	.cart-menu {
+		box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.45);
+		position: fixed;
+		inset: 0 0 0 120%;
+		margin: 0;
+		display: flex;
+		background-color: #0d0f14;
+		flex-direction: column;
+		transition: 0.8s;
+		z-index: 1000;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.show__menu {
+		inset: 0 0 0 30%;
+	}
+	@media (min-width: 1100px) {
+		.show__menu {
+			inset: 0 0 0 60%;
+		}
+	}
+</style>
