@@ -1,5 +1,5 @@
 ---
-import UserDashboard from "../../components/user/UserDashboard.astro";
+import Profile from "../../layouts/Profile.astro";
 import { getWhoisData } from "../../services/whois.ts";
 import { api } from "../../services/apiroute";
 
@@ -58,7 +58,7 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<UserDashboard>
+<Profile title="Directions">
   <div>
     <form
       class="h-full flex flex-col justify-between space-y-4 md:space-y-6"
@@ -134,20 +134,4 @@ if (Astro.request.method === "POST") {
       </div>
     </form>
   </div>
-</UserDashboard>
-
-<style>
-  body {
-    background-color: #0d0f14; /* Color de fondo blanco */
-    background-image:
-      linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-      /* Líneas verticales */
-        linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
-    background-size:
-      20px 20px,
-      20px 20px; /* Tamaño de las celdas de la cuadrícula */
-    background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
-    margin: 0; /* Elimina el margen predeterminado del body */
-    color: #fff;
-  }
-</style>
+</Profile>

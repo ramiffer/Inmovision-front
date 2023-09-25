@@ -8,84 +8,86 @@ let jwtValue = jwt?.value;
 let userData;
 
 if (jwt != undefined) {
-	userData = await getWhoisData(jwt.value);
-	console.log(userData);
+  userData = await getWhoisData(jwt.value);
+  console.log(userData);
 }
 
 if (Astro.request.method === "POST") {
-	try {
-		const data = await Astro.request.formData();
-		const name = String(data.get("name"));
-		const sDescription = String(data.get("sDescription"));
-		const lDescription = String(data.get("lDescription"));
-		const price = String(data.get("price"));
-		const imageData = String(data.get("imageData"));
+  try {
+    const data = await Astro.request.formData();
+    const name = String(data.get("name"));
+    const sDescription = String(data.get("sDescription"));
+    const lDescription = String(data.get("lDescription"));
+    const price = String(data.get("price"));
+    const imageData = String(data.get("imageData"));
 
-		const formData = new FormData();
-		formData.append("name", name);
-		formData.append("sDescription", sDescription);
-		formData.append("lDesription", lDescription);
-		formData.append("price", price);
-		formData.append("imageData", imageData);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("sDescription", sDescription);
+    formData.append("lDesription", lDescription);
+    formData.append("price", price);
+    formData.append("imageData", imageData);
 
-		console.log(userData.id);
+    console.log(userData.id);
 
-		const response = await fetch(`${api}api/article/${userData.id}/article`, {
-			method: "PUT",
-			headers: {
-				"Content-Type": "application/json",
-				Authorization: `Bearer ${jwtValue}`,
-			},
-			body: JSON.stringify({
-				name: name,
-				sDescription: sDescription,
-				lDescription: lDescription,
-				price: price,
-				imageData: imageData,
-			}),
-		});
+    const response = await fetch(`${api}api/article/${userData.id}/article`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwtValue}`,
+      },
+      body: JSON.stringify({
+        name: name,
+        sDescription: sDescription,
+        lDescription: lDescription,
+        price: price,
+        imageData: imageData,
+      }),
+    });
 
-		console.log(response);
+    console.log(response);
 
-		if (response.ok) {
-			console.log("Articulo registrado correctamente");
-		} else {
-			console.log("Error al registrar el articulo");
-		}
-	} catch (error) {
-		if (error instanceof Error) {
-			console.error(error.message);
-		}
-	}
+    if (response.ok) {
+      console.log("Articulo registrado correctamente");
+    } else {
+      console.log("Error al registrar el articulo");
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
 }
 ---
 
 <body class="bg-[#f3f3f3] flex flex-col items-center">
-	<h1 class="text-6xl">Crear producto</h1>
+  <h1 class="text-6xl">Crear producto</h1>
 
-	<form class="flex flex-col p-10 bg-[#a6a6a6]" method="POST">
-		<label for="name">Nombre del producto:</label>
-		<input type="text" name="name" id="name" />
+  <form class="flex flex-col p-10 bg-[#a6a6a6]" method="POST">
+    <label for="name">Nombre del producto:</label>
+    <input type="text" name="name" id="name" />
 
-		<label for="sDescription">Descripcion breve:</label>
-		<textarea name="sDescription" id="sDescription"></textarea>
+    <label for="sDescription">Descripcion breve:</label>
+    <textarea name="sDescription" id="sDescription"></textarea>
 
-		<label for="lDescription">Descripcion larga:</label>
-		<textarea name="lDescription" id="lDescription"></textarea>
+    <label for="lDescription">Descripcion larga:</label>
+    <textarea name="lDescription" id="lDescription"></textarea>
 
-		<label for="price">Precio del producto:</label>
-		<input type="number" name="price" id="price" min="0" />
+    <label for="price">Precio del producto:</label>
+    <input type="number" name="price" id="price" min="0" />
 
-		<label for="imageData">Link de la imagen:</label>
-		<input type="text" name="imageData" id="imageData" />
+    <label for="imageData">Link de la imagen:</label>
+    <input type="text" name="imageData" id="imageData" />
 
-		<input
-			type="submit"
-			value="Crear producto"
-			class="bg-blue-500 text-white p-2 rounded
+    <input
+      type="submit"
+      value="Crear producto"
+      class="bg-blue-500 text-white p-2 rounded
     hover:bg-blue-600 cursor-pointer"
-		/>
-	</form>
+    />
+  </form>
 </body>
-<a class="text-black" href="/inventory/list-of-products">Ver mi inventario de productos</a
+<a class="text-black" href="/inventory/list-of-products"
+  >Ver mi inventario de productos</a
 >
+<style is:inline></style>

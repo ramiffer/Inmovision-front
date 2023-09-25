@@ -1,47 +1,46 @@
 ---
 import { api } from "../../services/apiroute";
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = String(data.get("username"));
-    const firstName = String(data.get("firstName"));
-    const lastName = String(data.get("lastName"));
-    const email = String(data.get("email"));
-    const password = String(data.get("password"));
 
-    console.log(name, email, password + " " + firstName + " " + lastName);
+try {
+  const data = await Astro.request.formData();
+  const name = String(data.get("username"));
+  const firstName = String(data.get("firstName"));
+  const lastName = String(data.get("lastName"));
+  const email = String(data.get("email"));
+  const password = String(data.get("password"));
 
-    const formData = new FormData();
-    formData.append("username", name);
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("password", password);
+  console.log(name, email, password + " " + firstName + " " + lastName);
 
-    const response = await fetch(`${api}auth/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: name,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      }),
-    });
+  const formData = new FormData();
+  formData.append("username", name);
+  formData.append("firstName", firstName);
+  formData.append("lastName", lastName);
+  formData.append("email", email);
+  formData.append("password", password);
 
-    if (response.ok) {
-      console.log("Usuario registrado");
-      return Astro.redirect("/auth/login");
-    } else {
-      console.log("Error al registrar usuario");
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
+  const response = await fetch(`${api}auth/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: name,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    }),
+  });
+
+  if (response.ok) {
+    console.log("Usuario registrado");
+    return Astro.redirect("/auth/login");
+  } else {
+    console.log("Error al registrar usuario");
+  }
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
   }
 }
 ---

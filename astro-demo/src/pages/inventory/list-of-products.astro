@@ -9,98 +9,58 @@ let userData;
 let articleData: any = [];
 
 if (jwt != undefined) {
-	userData = await getWhoisData(jwt.value);
-	console.log(userData);
-	articleData = await getAllProductsForAllUsers(jwt.value, articleData);
-	console.log(articleData);
+  userData = await getWhoisData(jwt.value);
+  console.log(userData);
+  articleData = await getAllProductsForAllUsers(jwt.value, articleData);
+  console.log(articleData);
 }
 
 //Cargar imagenes a: https://freeimage.host/
 ---
 
 <html>
-	<head>
-		<title>Products</title>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-	</head>
-	<Header />
-	<body>
-		<section class="flex flex-col items-center mb-36 max-w-7xl px-4 m-auto related">
-			<h1 class="text-center text-5xl pb-12">Products</h1>
-			<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-				<ProductCard
-					id="1"
-					name="Lampara"
-					sDescription="Lampara verde"
-					price={20}
-					imageData="https://iili.io/JJdT5G9.md.png"
-				/>
-
-				<ProductCard
-					id="2"
-					name="Armario pequeño"
-					sDescription="Armario pequeño blanco"
-					price={70}
-					imageData="https://iili.io/JJdTRC7.md.png"
-				/>
-				<ProductCard
-					id="3"
-					name="Armario pequeño marron"
-					sDescription="Armario pequeño marron"
-					price={70}
-					imageData="https://iili.io/JJdTITl.md.png"
-				/>
-				<ProductCard
-					id="4"
-					name="Mesa blanca"
-					sDescription="Mesa blanca"
-					price={45}
-					imageData="https://iili.io/JJdTxp4.md.png"
-				/>
-				<ProductCard
-					id="5"
-					name="Mesa marron"
-					sDescription="Mesa marron"
-					price={45}
-					imageData="https://iili.io/JJdTuQS.md.png"
-				/>
-				<ProductCard
-					id="6"
-					name="Mesa negra y roja"
-					sDescription="Mesa negra y roja"
-					price={50}
-					imageData="https://iili.io/JJdTTj2.md.png"
-				/>
-				{
-					articleData?.map((article: any) => (
-						<ProductCard
-							id={article.id}
-							name={article.name}
-							sDescription={article.sDescription}
-							price={article.price}
-							imageData={article.imageData}
-						/>
-					))
-				}
-			</div>
-		</section>
-		<Footer id="footer" />
-		<style is:inline>
-			body {
-				background-color: #0d0f14; /* Color de fondo blanco */
-				background-image:
-					linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
-					/* Líneas verticales */ linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
-				background-size:
-					20px 20px,
-					20px 20px; /* Tamaño de las celdas de la cuadrícula */
-				background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
-				margin: 0; /* Elimina el margen predeterminado del body */
-				color: #fff;
-			}
-		</style>
-	</body>
+  <head>
+    <title>Products</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <Header />
+  <body>
+    <section
+      class="flex flex-col items-center mb-36 max-w-7xl px-4 m-auto related"
+    >
+      <h1 class="text-center text-5xl pb-12">Products</h1>
+      <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+        {
+          articleData?.map((article: any) => (
+            <ProductCard
+              id={article.id}
+              name={article.name}
+              sDescription={article.sDescription}
+              price={article.price}
+              imageData={article.imageData}
+            />
+          ))
+        }
+      </div>
+    </section>
+    <Footer id="footer" />
+    <style is:inline>
+      body {
+        background-color: #0d0f14; /* Color de fondo blanco */
+        background-image:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+          /* Líneas verticales */
+            linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+        background-size:
+          20px 20px,
+          20px 20px; /* Tamaño de las celdas de la cuadrícula */
+        background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+        margin: 0; /* Elimina el margen predeterminado del body */
+        color: #fff;
+      }
+    </style>
+  </body>
 
 
 </html>

@@ -1,0 +1,222 @@
+---
+import Footer from "../components/landing/Footer.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="scrollbar scrollbar-thumb-[#1b1c26] scrollbar-track-[#0D0F14]">
+    <main class="">
+      <section class="flex flex-col px-8 py-3">
+        <h1
+          class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
+        >
+          <a
+            href="/"
+            class="flex items-center justify-center mb-2 text-2xl font-semibold text-gray-900 dark:text-white"
+          >
+            <img
+              class="w-10 h-15 mr-2"
+              src="https://iili.io/J9vk1bS.png "
+              alt="logo"
+            />
+             Inmo<span class="text-[#a21caf]">vision</span>
+          </a>
+        </h1>
+        <div class="flex flex-col gap-5 h-auto md:flex-row">
+          <div
+            class="flex justify-between flex-col w-auto md:w-72 bg-[#0D0F14] border border-[#343841] shadow-2xl px-5 py-2 text-sm rounded-lg ml-5 text-center"
+          >
+            <ul class="flex flex-col gap-5 py-3">
+              <li
+                class="flex-row justify-center border text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 hover:shadow-lg transition-all duration-200 ease-in-out opacity-70 hover:opacity-100"
+              >
+                <a class="w-full py-2 px-3" href="/profile/information">
+                  <button class="flex items-center gap-2" id="general">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-info-square-rounded"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M12 9h.01"></path>
+                      <path d="M11 12h1v4h1"></path>
+                      <path
+                        d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z"
+                      ></path>
+                    </svg>
+                     Information</button
+                  ></a
+                >
+              </li>
+              <li
+                class="flex-row justify-center border text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 hover:shadow-lg transition-all duration-200 ease-in-out opacity-70 hover:opacity-100"
+              >
+                <a class="w-full py-2 px-3" href="/profile/edit-profile"
+                  ><button class="flex items-center gap-2" id="add">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-pencil"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"
+                      ></path>
+                      <path d="M13.5 6.5l4 4"></path>
+                    </svg>
+                     Edit profile</button
+                  ></a
+                >
+              </li>
+              <li
+                class="flex-row justify-center border text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 hover:shadow-lg transition-all duration-200 ease-in-out opacity-70 hover:opacity-100"
+              >
+                <a href="/profile/directions" class="w-full py-2 px-3">
+                  <button class="flex items-center gap-2" id="add">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-home-edit"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path
+                        d="M9 21v-6a2 2 0 0 1 2 -2h2c.645 0 1.218 .305 1.584 .78"
+                      ></path>
+                      <path d="M20 11l-8 -8l-9 9h2v7a2 2 0 0 0 2 2h4"></path>
+                      <path
+                        d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z"
+                      ></path>
+                    </svg>
+                     Directions</button
+                  ></a
+                >
+              </li>
+              <li
+                class="flex-row justify-center border text-white cursor-pointer hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-center inline-flex items-center dark:focus:ring-[#1da1f2]/55 hover:shadow-lg transition-all duration-200 ease-in-out opacity-70 hover:opacity-100"
+              >
+                <a href="/profile/supplier" class="w-full py-2 px-3">
+                  <button class="flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-user-plus"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+                      <path d="M16 19h6"></path>
+                      <path d="M19 16v6"></path>
+                      <path d="M6 21v-2a4 4 0 0 1 4 -4h4"></path>
+                    </svg>
+                     Supplier</button
+                  ></a
+                >
+              </li>
+            </ul>
+            <div class="py-3">
+              <a
+                href="/logout"
+                class="w-full bg-[#6A1827] flex items-center gap-2 flex-row justify-center border border-[#6A1827] text-white cursor-pointer hover:bg-none
+        focus:ring-4 focus:outline-none focus:ring-[#1da1f2]/50 font-medium rounded-lg text-center inline-flex
+        items-center dark:focus:ring-[#1da1f2]/55 p-2 hover:shadow-lg transition-all duration-200 ease-in-out
+     opacity-70 hover:opacity-100"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-logout"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  stroke-width="2"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path
+                    d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
+                  ></path>
+                  <path d="M9 12h12l-3 -3"></path>
+                  <path d="M18 15l3 -3"></path>
+                </svg>
+                 Cerrar Sesion
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="w-auto md:w-full border bg-[#0D0F14] border-[#343841] shadow-2xl p-5 rounded-lg ml-5"
+            id="content"
+          >
+            <slot />
+          </div>
+        </div>
+      </section>
+      <Footer id="" />
+    </main>
+
+    <style is:global>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;700&display=swap");
+      * {
+        font-family: "Inter", sans-serif;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background-color: #0d0f14; /* Color de fondo blanco */
+        background-image:
+          linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+          /* Líneas verticales */
+            linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+        background-size:
+          20px 20px,
+          20px 20px; /* Tamaño de las celdas de la cuadrícula */
+        background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+        margin: 0; /* Elimina el margen predeterminado del body */
+        color: #fff;
+      }
+    </style>
+  </body>
+</html>
