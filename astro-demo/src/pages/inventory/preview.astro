@@ -6,6 +6,61 @@
     <title>Details</title>
   </head>
   <body>
+    <section class="bg-gray-800 text-white p-4">
+      <button
+        class="button bg-gray700 hover:bg-gray-600 text-white px-3 py-2 rounded-md focus:outline-none"
+      >
+        Articles</button
+      >
+      <div
+        class="hidden absolute bg-gray-800 text-white p-2 rounded-md shadow-lg"
+      >
+        <div class="image-grid">
+          <div class="image-item">
+            <img
+              class="sillon"
+              src="../../../public/objects/1/set2.png"
+              alt="Sillon"
+            />
+          </div>
+          <div class="image-item">
+            <img
+              class="armario"
+              src="../../../public/objects/2/escritorioBlanco.png"
+              alt="Armario"
+            />
+          </div>
+          <div class="image-item">
+            <img
+              class="mesita"
+              src="../../../public/objects/3/mesitaBlanca.png"
+              alt="Mesita"
+            />
+          </div>
+          <div class="image-item">
+            <img
+              class="placard"
+              src="../../../public/objects/4/placardBlanco.png"
+              alt="Placard"
+            />
+          </div>
+          <div class="image-item">
+            <img
+              class="silla"
+              src="../../../public/objects/5/Rocking_chair.png"
+              alt="Silla"
+            />
+          </div>
+          <div class="image-item">
+            <img
+              class="cajonera"
+              src="../../../public/objects/6/setsillon1.png"
+              alt="Sillon chico"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
     <h1
       class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
     >
@@ -54,53 +109,115 @@
       margin: 0; /* Elimina el margen predeterminado del body */
       color: #fff;
     }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .image-item {
+      background-color: #fff;
+      padding: 8px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+    }
+    .image-item img {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 
   <script>
     import * as THREE from "three";
     import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    let urlGLB = "" || "../../../public/objects/1/set2.glb";
     document.addEventListener("DOMContentLoaded", () => {
-      const canvas = document.getElementById(
-        "threeCanvas"
-      ) as HTMLCanvasElement;
-      console.log(canvas);
+      const sillon = document.querySelector(".sillon");
+      const armario = document.querySelector(".armario");
+      const mesita = document.querySelector(".mesita");
+      const placard = document.querySelector(".placard");
+      const silla = document.querySelector(".silla");
+      const cajonera = document.querySelector(".cajonera");
 
-      const newWidth = 1200;
-      const newHeight = 800;
-      const renderer = new THREE.WebGLRenderer({ canvas });
-      renderer.setClearColor(0x8b4513);
-      renderer.setSize(newWidth, newHeight);
-      console.log(renderer);
+      sillon.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/1/set2.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
+      armario.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/2/escritorioBlanco.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
+      mesita.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/3/mesitaBlanca.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
+      placard.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/4/placardBlanco.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
+      silla.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/5/Rocking_chair.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
+      cajonera.addEventListener("click", () => {
+        urlGLB = "../../../public/objects/6/setsillon1.glb";
+        console.log(urlGLB);
+        cargarModelo();
+      });
 
-      const scene = new THREE.Scene();
-      console.log(scene);
+      console.log(urlGLB);
 
-      const camera = new THREE.PerspectiveCamera(
-        20,
-        newWidth / newHeight,
-        1,
-        1000
-      );
-      console.log(camera);
+      const menuButton = document.querySelector(".button");
+      const menu = document.querySelector(".absolute");
 
-      const light = new THREE.AmbientLight(0xffffff, 0.5);
-      scene.add(light);
+      menuButton?.addEventListener("click", () => {
+        console.log("click");
+        menu?.classList.toggle("hidden");
+      });
+    });
+    const canvas = document.getElementById("threeCanvas") as HTMLCanvasElement;
 
-      //<--Aca empieza el quilombo -->
+    const newWidth = 1200;
+    const newHeight = 800;
+    const renderer = new THREE.WebGLRenderer({ canvas });
+    renderer.setClearColor(0x8b4513);
+    renderer.setSize(newWidth, newHeight);
 
-      var loader = new GLTFLoader();
-      let model: any;
-      let newMaterial: any;
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(
+      20,
+      newWidth / newHeight,
+      1,
+      1000
+    );
+
+    const light = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(light);
+
+    //<--Aca empieza el quilombo -->
+    var loader = new GLTFLoader();
+    let model: any;
+    let newMaterial: any;
+
+    function cargarModelo() {
+      if (model) {
+        scene.remove(model);
+        model = undefined;
+      }
       loader.load(
-        "../../../public/objects/set2.glb",
+        urlGLB,
         function (gltf) {
-          console.log("gltf", gltf);
-          console.log("loader", loader);
           // Código para manejar la carga exitosa del modelo
           model = gltf.scene;
           console.log("Modelo cargado exitosamente", model);
           scene.add(model);
-          model.scale.set(0.35, 0.35, 0.35);
           const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
           directionalLight.position.set(1, 1, 1); // Posición de la luz
           scene.add(directionalLight);
@@ -131,7 +248,27 @@
           const boundingBox = new THREE.Box3().setFromObject(model);
           const center = new THREE.Vector3();
           boundingBox.getCenter(center);
-          camera.position.set(12, 3, -5); // Coloca la cámara en una posición inicial
+
+          if (urlGLB == "../../../public/objects/1/set2.glb") {
+            camera.position.set(15, 3, -5);
+            model.scale.set(0.35, 0.35, 0.35);
+          }
+          if (urlGLB == "../../../public/objects/2/escritorioBlanco.glb") {
+            camera.position.set(0, 5, 10);
+          }
+          if (urlGLB == "../../../public/objects/3/mesitaBlanca.glb") {
+            camera.position.set(12, 3, -5);
+          }
+          if (urlGLB == "../../../public/objects/4/placardBlanco.glb") {
+            camera.position.set(12, 3, -5);
+          }
+          if (urlGLB == "../../../public/objects/5/Rocking_chair.glb") {
+            camera.position.set(12, 3, -5);
+          }
+          if (urlGLB == "../../../public/objects/6/setsillon1.glb") {
+            camera.position.set(50, 15, 25);
+            model.scale.set(1.7, 1.7, 1.7);
+          }
           camera.lookAt(center);
 
           animate();
@@ -144,15 +281,40 @@
           console.error("Error al cargar el modelo:", error); // Codigo para manejar errores durante la carga
         }
       );
-      //<!--Aca termina el quilombo -->
+    }
+    //<!--Aca termina el quilombo -->
 
-      const animate = () => {
-        requestAnimationFrame(animate);
-        if (model) {
-          model.rotation.y += 0.005;
+    const modelRotation = { x: 0, y: 0, z: 0 };
+
+    // Función para rotar el modelo según las teclas de flecha
+    function rotarModelo(event) {
+      if (model) {
+        switch (event.key) {
+          case "ArrowLeft":
+            modelRotation.y += 0.1; // Gira el modelo hacia la izquierda
+            break;
+          case "ArrowRight":
+            modelRotation.y -= 0.1; // Gira el modelo hacia la derecha
+            break;
+          case "ArrowUp":
+            modelRotation.x += 0.1; // Gira el modelo hacia arriba
+            break;
+          case "ArrowDown":
+            modelRotation.x -= 0.1; // Gira el modelo hacia abajo
+            break;
         }
-        renderer.render(scene, camera);
-      };
-    });
+        // Actualiza la rotación del modelo
+        model.rotation.set(modelRotation.x, modelRotation.y, modelRotation.z);
+      }
+    }
+
+    // Agrega un evento para escuchar las teclas de flecha
+    document.addEventListener("keydown", rotarModelo);
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      renderer.render(scene, camera);
+    };
   </script>
 </html>

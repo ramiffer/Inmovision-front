@@ -1,6 +1,10 @@
 ---
 import { api } from "../../services/apiroute";
 import { getWhoisData } from "../../services/whois";
+import ProductCard from "../../components/products/ProductCard.astro";
+import { getAllProductsForAllUsers } from "../../services/getAllProducts";
+import Header from "../../components/header/Header.astro";
+import Footer from "../../components/landing/Footer.astro";
 
 const jwt = Astro.cookies.get("jwt");
 let jwtValue = jwt?.value;
@@ -60,34 +64,105 @@ if (Astro.request.method === "POST") {
 }
 ---
 
-<body class="bg-[#f3f3f3] flex flex-col items-center">
-  <h1 class="text-6xl">Crear producto</h1>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>New Product</title>
+  </head>
+  <body
+    class="h-screen scrollbar scrollbar-thumb-[#1b1c26] scrollbar-track-[#0D0F14]"
+  >
+    <Header />
+    <main
+      class="flex flex-col items-center mb-36 max-w-7xl px-4 m-auto related"
+    >
+      <h1 class="text-6xl text-center mb-12">Crear producto</h1>
+      <form
+        class="border border-[#343841] shadow-2xl rounded-lg flex flex-col p-10 bg-[#0d0f14] w-[800px] gap-6"
+        method="POST"
+      >
+        <label class="flex justify-between" for="name"
+          >Nombre del producto:
+          <input
+            type="text"
+            class="text-black p-4 w-[360px]"
+            name="name"
+            id="name"
+          />
+        </label>
+        <label class="flex justify-between" for="sDescription"
+          >Descripcion breve:
+          <textarea
+            name="sDescription"
+            class="text-black p-4 w-[360px]"
+            id="sDescription"></textarea></label
+        >
 
-  <form class="flex flex-col p-10 bg-[#a6a6a6]" method="POST">
-    <label for="name">Nombre del producto:</label>
-    <input type="text" name="name" id="name" />
+        <label class="flex justify-between" for="lDescription"
+          >Descripcion larga:
+          <textarea
+            name="lDescription"
+            class="text-black p-4 w-[360px]"
+            id="lDescription"></textarea></label
+        >
 
-    <label for="sDescription">Descripcion breve:</label>
-    <textarea name="sDescription" id="sDescription"></textarea>
+        <label class="flex justify-between" for="price"
+          >Precio del producto:
+          <input
+            type="number"
+            name="price"
+            class="text-black p-4 w-[360px]"
+            id="price"
+            min="0"
+          /></label
+        >
 
-    <label for="lDescription">Descripcion larga:</label>
-    <textarea name="lDescription" id="lDescription"></textarea>
+        <label class="flex justify-between" for="imageData"
+          >Link de la imagen:
+          <input
+            type="text"
+            name="imageData"
+            class="text-black p-4 w-[360px]"
+            id="imageData"
+          /></label
+        >
 
-    <label for="price">Precio del producto:</label>
-    <input type="number" name="price" id="price" min="0" />
+        <input
+          type="submit"
+          value="Crear producto"
+          class="bg-blue-700 text-white p-4 rounded
+              hover:bg-blue-600 cursor-pointer"
+        />
+      </form>
+    </main>
+  </body>
+  <style is:global>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;700&display=swap");
+    * {
+      font-family: "Inter", sans-serif;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <label for="imageData">Link de la imagen:</label>
-    <input type="text" name="imageData" id="imageData" />
-
-    <input
-      type="submit"
-      value="Crear producto"
-      class="bg-blue-500 text-white p-2 rounded
-    hover:bg-blue-600 cursor-pointer"
-    />
-  </form>
-</body>
-<a class="text-black" href="/inventory/list-of-products"
-  >Ver mi inventario de productos</a
->
-<style is:inline></style>
+    body {
+      background-color: #0d0f14; /* Color de fondo blanco */
+      background-image: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, 0.2) 1px,
+        transparent 1px
+      );
+      /* Líneas verticales / linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); / Líneas horizontales */
+      background-size:
+        20px 20px,
+        20px 20px; /* Tamaño de las celdas de la cuadrícula */
+      background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+      margin: 0; /* Elimina el margen predeterminado del body */
+      color: #fff;
+    }
+  </style>
+</html>
