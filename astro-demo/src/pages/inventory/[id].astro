@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+  </head>
+  <body>
+    <h1>Test</h1>
+    <canvas id="threeCanvas"></canvas>
+  </body>
+</html>
+
+<script>
+  import * as THREE from "three";
+  import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("threeCanvas") as HTMLCanvasElement;
+    console.log(canvas);
+
+    const newWidth = 800;
+    const newHeight = 600;
+    const renderer = new THREE.WebGLRenderer({ canvas });
+    renderer.setClearColor(0xfffffff);
+    renderer.setSize(newWidth, newHeight);
+    console.log(renderer);
+
+    const scene = new THREE.Scene();
+    console.log(scene);
+
+    scene.children.forEach((child) => {
+      if (child instanceof THREE.Light) {
+        scene.remove(child);
+      }
+    });
+
+    const camera = new THREE.PerspectiveCamera(
+      20,
+      newWidth / newHeight,
+      1,
+      1000
+    );
+    console.log(camera);
+
+    //<--Aca empieza el quilombo -->
+
+    var loader = new GLTFLoader();
+    let model: any;
+    loader.load(
+      "../../../public/objects/CatalogoFinal/armario/armarioClaro2.glb",
+      function (gltf) {
+        console.log("gltf", gltf);
+        console.log("loader", loader);
+        // Código para manejar la carga exitosa del modelo
+        model = gltf.scene;
+        console.log("Modelo cargado exitosamente", model);
+        scene.add(model);
+        model.position.set(-5, 0, 2);
+        model.rotation.set(0, 0, 0);
+        model.scale.set(0.2, 0.2, 0.2);
+        camera.lookAt(model.position);
+
+        model.traverse((node: any) => {
+          if (node instanceof THREE.Mesh) {
+            const material = new THREE.MeshStandardMaterial({
+              color: 0xffffff,
+            });
+            node.material = material;
+            console.log("node", node);
+          }
+        });
+
+        const boundingBox = new THREE.Box3().setFromObject(model);
+        const center = new THREE.Vector3();
+        boundingBox.getCenter(center);
+        camera.position.set(0, 0, 10); // Coloca la cámara en una posición inicial
+        camera.lookAt(center);
+
+        animate();
+      },
+      (xhr) => {
+        const percentage = (xhr.loaded / xhr.total) * 100; // Codigo para manejar el progreso de la carga (opcional)
+        console.log(`Cargando: ${percentage}%`);
+      },
+      (error) => {
+        console.error("Error al cargar el modelo:", error); // Codigo para manejar errores durante la carga
+      }
+    );
+    //<!--Aca termina el quilombo -->
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      if (model) {
+      }
+      renderer.render(scene, camera);
+    };
+  });
+</script>

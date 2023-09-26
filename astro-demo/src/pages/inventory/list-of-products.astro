@@ -33,19 +33,22 @@ if (jwt != undefined) {
       <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
         {
           articleData?.map((article: any) => (
-            <ProductCard
-              id={article.id}
-              name={article.name}
-              sDescription={article.sDescription}
-              price={article.price}
-              imageData={article.imageData}
-            />
+            <>
+              <ProductCard
+                href={`/inventory/${article.id}`}
+                id={article.id}
+                name={article.name}
+                sDescription={article.sDescription}
+                price={article.price}
+                imageData={article.imageData}
+              />
+            </>
           ))
         }
       </div>
     </section>
     <Footer id="footer" />
-    <style is:inline>
+    <style>
       body {
         background-color: #0d0f14; /* Color de fondo blanco */
         background-image:
@@ -58,6 +61,12 @@ if (jwt != undefined) {
         background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
         margin: 0; /* Elimina el margen predeterminado del body */
         color: #fff;
+      }
+
+      .link {
+        background-color: white;
+        z-index: 1;
+        opacity: 0;
       }
     </style>
   </body>
