@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details</title>
+  </head>
+  <body>
+    <h1
+      class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"
+    >
+      <a
+        href="/"
+        class="flex items-center justify-center mb-2 text-2xl font-semibold text-gray-900 dark:text-white"
+      >
+        <img
+          class="w-10 h-15 mr-2"
+          src="https://iili.io/J9vk1bS.png "
+          alt="logo"
+        />
+         Inmo<span class="text-[#a21caf]">vision</span>
+      </a>
+    </h1>
+    <div class="flex justify-center gap-10">
+      <aside class="flex flex-col items-center gap-10 justify-center">
+        <input
+          class="w-10 h-10 border-2 border-gray-400 rounded-full appearance-none"
+          type="color"
+          id="colorPicker"
+          value="#ffffff"
+        />
+        <button
+          class="mt-2 bg-blue-500 text-white py-2 px-4 rounded"
+          id="changeColorButton">Change Color</button
+        >
+      </aside>
+      <section class="flex flex-col items-center">
+        <canvas class="border" id="threeCanvas"></canvas>
+      </section>
+    </div>
+  </body>
+
+  <style>
+    body {
+      background-color: #0d0f14; /* Color de fondo blanco */
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
+        /* Líneas verticales */
+          linear-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px); /* Líneas horizontales */
+      background-size:
+        20px 20px,
+        20px 20px; /* Tamaño de las celdas de la cuadrícula */
+      background-repeat: repeat, repeat; /* Repetición de gradientes para formar la cuadrícula */
+      margin: 0; /* Elimina el margen predeterminado del body */
+      color: #fff;
+    }
+  </style>
+
+  <script>
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById(
+        "threeCanvas"
+      ) as HTMLCanvasElement;
+      console.log(canvas);
+
+      const newWidth = 1200;
+      const newHeight = 800;
+      const renderer = new THREE.WebGLRenderer({ canvas });
+      renderer.setClearColor(0x8b4513);
+      renderer.setSize(newWidth, newHeight);
+      console.log(renderer);
+
+      const scene = new THREE.Scene();
+      console.log(scene);
+
+      const camera = new THREE.PerspectiveCamera(
+        20,
+        newWidth / newHeight,
+        1,
+        1000
+      );
+      console.log(camera);
+
+      const light = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(light);
+
+      //<--Aca empieza el quilombo -->
+
+      var loader = new GLTFLoader();
+      let model: any;
+      let newMaterial: any;
+      loader.load(
+        "../../../public/objects/set2.glb",
+        function (gltf) {
+          console.log("gltf", gltf);
+          console.log("loader", loader);
+          // Código para manejar la carga exitosa del modelo
+          model = gltf.scene;
+          console.log("Modelo cargado exitosamente", model);
+          scene.add(model);
+          model.scale.set(0.35, 0.35, 0.35);
+          const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+          directionalLight.position.set(1, 1, 1); // Posición de la luz
+          scene.add(directionalLight);
+
+          //<-- BOTON PICKER -->
+          const colorPicker = document.getElementById(
+            "colorPicker"
+          ) as HTMLInputElement;
+          const changeColorButton =
+            document.getElementById("changeColorButton");
+
+          changeColorButton?.addEventListener("click", () => {
+            if (model) {
+              const selectedColor = colorPicker.value;
+              newMaterial = new THREE.MeshStandardMaterial({
+                color: new THREE.Color(selectedColor),
+              });
+
+              // Aplicar el nuevo material a todas las partes del modelo
+              model.traverse((node: any) => {
+                if (node instanceof THREE.Mesh) {
+                  node.material = newMaterial;
+                }
+              });
+            }
+          });
+
+          const boundingBox = new THREE.Box3().setFromObject(model);
+          const center = new THREE.Vector3();
+          boundingBox.getCenter(center);
+          camera.position.set(12, 3, -5); // Coloca la cámara en una posición inicial
+          camera.lookAt(center);
+
+          animate();
+        },
+        (xhr) => {
+          const percentage = (xhr.loaded / xhr.total) * 100; // Codigo para manejar el progreso de la carga (opcional)
+          console.log(`Cargando: ${percentage}%`);
+        },
+        (error) => {
+          console.error("Error al cargar el modelo:", error); // Codigo para manejar errores durante la carga
+        }
+      );
+      //<!--Aca termina el quilombo -->
+
+      const animate = () => {
+        requestAnimationFrame(animate);
+        if (model) {
+          model.rotation.y += 0.005;
+        }
+        renderer.render(scene, camera);
+      };
+    });
+  </script>
+</html>
